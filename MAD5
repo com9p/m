@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+  MaterialApp(home:CalculatorApp(),debugShowCheckedModeBanner: false,));
+}
+
+class CalculatorApp extends StatefulWidget{
+  const CalculatorApp({super.key});
+  @override
+  _CalculatorAppState createState()=> _CalculatorAppState();
+
+}
+class _CalculatorAppState extends State<CalculatorApp>{
+  final TextEditingController Num1 = TextEditingController();
+  final TextEditingController Num2 = TextEditingController();
+  String result = "";
+  void calculate(String operation){
+    double num1  = double.tryParse(Num1.text) ?? 0;
+    double num2  = double.tryParse(Num2.text) ?? 0;
+    double res = 0;
+    switch(operation){
+      case'+':
+        res = num1+num2;
+        break;
+      case'-':
+        res = num1-num2;
+        break;
+      case'*':
+        res = num1*num2;
+        break;
+      case'/':
+        res = (num2!=0) ? num1/num2 : double.infinity;
+        break;
+    }
+    setState(() {
+      result="Result:$res";
+    });
+  }
+@override
+Widget build(BuildContext context){
+  return Scaffold(
+    appBar: AppBar(title: Text("Calculator"),),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: Num1,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: "Num 1"),
+          ),
+
+TextField(
+            controller: Num2,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: "Num 1"),
+          ),
+          SizedBox(width: 20,),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(onPressed: ()=> calculate('+'), child: Text("+")),
+            ElevatedButton(onPressed: ()=> calculate('-'), child: Text("-")),
+            ElevatedButton(onPressed: ()=> calculate('*'), child: Text("*")),
+            ElevatedButton(onPressed: ()=> calculate('/'), child: Text("/")),
+            
+          ],
+          
+          ),
+          SizedBox(height: 20,),
+          Text(result),
+
+
+
+        ],
+      ),
+    ),
+  );
+}
+
+}
+
