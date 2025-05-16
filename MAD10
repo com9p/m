@@ -51,3 +51,9 @@ class _AnimatedLogoScreenState extends State<AnimatedLogoScreen>
     );
   }
 }
+
+
+
+
+(assets:
+    -assets/logo.png)
